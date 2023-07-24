@@ -11,7 +11,7 @@ typedef struct {
   int target_index;
   int is_inputs;
   int data_index;
-} InputInfo;
+} InputMap;
 
 typedef struct {
   int index;
@@ -21,7 +21,7 @@ typedef struct {
   TI_REAL * inputs[DATA_MAX];
   int outputs_offset;
   TI_REAL * outputs[DATA_MAX];
-  InputInfo inputs_info[DATA_MAX];
+  InputMap inputs_map[DATA_MAX];
 } Task;
 
 int next = 0;
@@ -32,7 +32,7 @@ void task_init(int index) {
   for (int i = 0; i < DATA_MAX; ++i) {
     task->inputs[i] = NULL;
     task->outputs[i] = NULL;
-    task->inputs_info[i].enabled = 0;
+    task->inputs_map[i].enabled = 0;
   }
 }
 
@@ -47,7 +47,7 @@ void task_free(int index) {
       free(task->outputs[i]);
       task->outputs[i] = NULL;
     }
-    task->inputs_info[i].enabled = 0;
+    task->inputs_map[i].enabled = 0;
   }
 }
 
