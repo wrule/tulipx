@@ -65,7 +65,7 @@ void push(int indic_index, int size, int start_task) {
   }
 }
 
-TI_REAL * input(int task_index, int data_index) {
+TI_REAL * inputs(int task_index, int data_index) {
   Task * task = &tasks[task_index];
   if (task->inputs[data_index] == NULL)
     task->inputs[data_index] = malloc(sizeof(TI_REAL) * task->size);
@@ -76,11 +76,11 @@ TI_REAL * options(int task_index) {
   return tasks[task_index].options;
 }
 
-TI_REAL * output(int task_index, int data_index) {
+TI_REAL * outputs(int task_index, int data_index) {
   return tasks[task_index].outputs[data_index];
 }
 
-void input_map(
+void inputs_map(
   int task_index,
   int input_index,
   int enabled,
