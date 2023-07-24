@@ -6,12 +6,8 @@
 #define DATA_MAX 4
 #define TASK_MAX 1000
 
-typedef enum {
-  INPUT_NONE, INPUT_MAP, INPUT_DATA
-} InputType;
-
 typedef struct {
-  InputType type;
+  int enabled;
   int target_index;
   int is_inputs;
   int data_index;
