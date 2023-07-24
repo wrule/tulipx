@@ -27,6 +27,15 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
+void task_init(int index) {
+  Task * task = &tasks[index];
+  for (int i = 0; i < DATA_MAX; ++i) {
+    task->inputs[i] = NULL;
+    task->outputs[i] = NULL;
+    task->inputs_info[i].enabled = 0;
+  }
+}
+
 void task_free(int index) {
   Task * task = &tasks[index];
   for (int i = 0; i < DATA_MAX; ++i) {
