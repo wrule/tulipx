@@ -18,9 +18,7 @@ typedef struct {
 } InputInfo;
 
 typedef struct {
-  int used;
   int index;
-  int start_task;
   int size;
   TI_REAL options[DATA_MAX];
   int inputs_offset;
@@ -33,17 +31,18 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
-void free_task(int index) {
+void task_free(int index) {
   Task * task = &tasks[index];
-  if (!task->used) return;
-  if (!task->start_task) {
-    ti_indicator_info * indic = &ti_indicators[task->index];
-    for (int i = 0; i < indic->inputs; ++i)
-      if (!task->inputs_info[i].type == INPUT_DATA) free(task->inputs[i]);
-    for (int i = 0; i < indic->outputs; ++i)
+  for (int i = 0; i < DATA_MAX; ++i) {
+    if (task->inputs[i] != NULL) {
+      free(task->inputs[i]);
+      task->inputs[i] = NULL;
+    }
+    if (task->outputs[i] != NULL) {
       free(task->outputs[i]);
+      task->outputs[i] = NULL;
+    }
   }
-  task->used = 0;
 }
 
 int main() {
