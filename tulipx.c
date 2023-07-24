@@ -51,13 +51,16 @@ void task_free(int index) {
   }
 }
 
-void task_push(int index, int size, int start_task) {
+void task_push(int index, int size, int map_bits, int start_task) {
   task_free(next);
   Task * task = &tasks[next];
   task->index = index;
   task->size = size;
   ti_indicator_info * indic = &ti_indicators[index];
   if (!start_task) {
+    for (int i = 0; i < indic->inputs; ++i)
+      if (map_bits >> i & 0x01)
+        task->inputs[i] = malloc(sizeof(TI_REAL) * size);
     for (int i = 0; i < indic->outputs; ++i)
     task->outputs[i] = malloc(sizeof(TI_REAL) * size);
   }
