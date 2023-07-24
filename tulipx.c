@@ -70,6 +70,14 @@ TI_REAL * task_input(int task_index, int data_index) {
   return task->inputs[data_index];
 }
 
+TI_REAL * task_options(int task_index) {
+  return tasks[task_index].options;
+}
+
+TI_REAL * task_output(int task_index, int data_index) {
+  return tasks[task_index].outputs[data_index];
+}
+
 int main() {
   printf("你好，世界\n");
   return 0;
