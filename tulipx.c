@@ -14,9 +14,9 @@ typedef struct {
 } InputMap;
 
 typedef struct {
-  int indic_index;
   int size;
   int start_task;
+  int indic_index;
   TI_REAL options[DATA_MAX];
   int inputs_offset;
   TI_REAL * inputs[DATA_MAX];
