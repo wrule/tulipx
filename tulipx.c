@@ -3,8 +3,8 @@
 #include "candles.h"
 #include "indicators.h"
 
-#define TASK_MAX 1000
 #define DATA_MAX 4
+#define TASK_MAX 1000
 
 typedef enum {
   INPUT_NONE, INPUT_MAP, INPUT_DATA
