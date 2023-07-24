@@ -59,7 +59,7 @@ void task_push(int index, int size, int start_task) {
   ti_indicator_info * indic = &ti_indicators[index];
   if (!start_task) {
     for (int i = 0; i < indic->outputs; ++i)
-    task->outputs[i] = malloc(sizeof(TI_REAL) * size);
+      task->outputs[i] = malloc(sizeof(TI_REAL) * size);
   }
 }
 
