@@ -28,8 +28,8 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
-void task_init(int index) {
-  Task * task = &tasks[index];
+void task_init(int task_index) {
+  Task * task = &tasks[task_index];
   for (int i = 0; i < DATA_MAX; ++i) {
     task->inputs[i] = NULL;
     task->outputs[i] = NULL;
@@ -37,8 +37,8 @@ void task_init(int index) {
   }
 }
 
-void task_free(int index) {
-  Task * task = &tasks[index];
+void task_free(int task_index) {
+  Task * task = &tasks[task_index];
   for (int i = 0; i < DATA_MAX; ++i) {
     if (task->inputs[i] != NULL) {
       free(task->inputs[i]);
