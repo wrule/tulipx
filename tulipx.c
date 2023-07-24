@@ -29,6 +29,9 @@ typedef struct {
   InputInfo inputs_info[DATA_MAX];
 } Task;
 
+int next = 0;
+Task tasks[TASK_MAX];
+
 int main() {
   printf("你好，世界\n");
   return 0;
