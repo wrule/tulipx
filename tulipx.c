@@ -78,6 +78,21 @@ TI_REAL * task_output(int task_index, int data_index) {
   return tasks[task_index].outputs[data_index];
 }
 
+void task_input_map(
+  int task_index,
+  int input_index,
+  int enabled,
+  int target_index,
+  int is_inputs,
+  int data_index
+) {
+  InputMap * map = &tasks[task_index].inputs_map[input_index];
+  map->enabled = enabled;
+  map->target_index = target_index;
+  map->is_inputs = is_inputs;
+  map->data_index = data_index;
+}
+
 int main() {
   printf("你好，世界\n");
   return 0;
