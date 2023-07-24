@@ -127,11 +127,10 @@ void link(int task_index) {
 void run(int task_index) {
   Task * task = &tasks[task_index];
   ti_indicator_info * indic = &ti_indicators[task->indic_index];
-  if (task->start_task) {
-    task->outputs_offset = indic->start(task->options);
-    return;
-  }
-  //
+  task->outputs_offset = indic->start(task->options);
+  if (task->start_task) return;
+  link(task_index);
+  task->outputs_offset += task->inputs_offset;
   const TI_REAL * inputs[DATA_MAX];
   TI_REAL * outputs[DATA_MAX];
   for (int i = 0; i < indic->inputs; ++i)
