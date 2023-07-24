@@ -11,11 +11,11 @@ typedef enum {
 } InputType;
 
 typedef struct {
-  int enabled;
+  InputType type;
   int target_index;
-  int is_outputs;
+  int is_inputs;
   int data_index;
-} MapInfo;
+} InputInfo;
 
 typedef struct {
   int used;
