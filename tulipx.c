@@ -53,7 +53,7 @@ void erase(int task_index) {
 }
 
 void push(int indic_index, int size, int start_task) {
-  task_free(next);
+  erase(next);
   Task * task = &tasks[next];
   task->indic_index = indic_index;
   task->size = size;
