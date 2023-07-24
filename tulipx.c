@@ -28,7 +28,7 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
-void task_init(int task_index) {
+void init(int task_index) {
   Task * task = &tasks[task_index];
   for (int i = 0; i < DATA_MAX; ++i) {
     task->inputs[i] = NULL;
@@ -52,7 +52,7 @@ void task_free(int task_index) {
   }
 }
 
-void task_push(int indic_index, int size, int start_task) {
+void push(int indic_index, int size, int start_task) {
   task_free(next);
   Task * task = &tasks[next];
   task->indic_index = indic_index;
@@ -65,22 +65,22 @@ void task_push(int indic_index, int size, int start_task) {
   }
 }
 
-TI_REAL * task_input(int task_index, int data_index) {
+TI_REAL * input(int task_index, int data_index) {
   Task * task = &tasks[task_index];
   if (task->inputs[data_index] == NULL)
     task->inputs[data_index] = malloc(sizeof(TI_REAL) * task->size);
   return task->inputs[data_index];
 }
 
-TI_REAL * task_options(int task_index) {
+TI_REAL * options(int task_index) {
   return tasks[task_index].options;
 }
 
-TI_REAL * task_output(int task_index, int data_index) {
+TI_REAL * output(int task_index, int data_index) {
   return tasks[task_index].outputs[data_index];
 }
 
-void task_input_map(
+void input_map(
   int task_index,
   int input_index,
   int enabled,
@@ -95,7 +95,15 @@ void task_input_map(
   map->data_index = data_index;
 }
 
-void task_link(int task_index) {
+int inputs_offset(int task_index) {
+  return tasks[task_index].inputs_offset;
+}
+
+int outputs_offset(int task_index) {
+  return tasks[task_index].outputs_offset;
+}
+
+void link(int task_index) {
   Task * task = &tasks[task_index];
   ti_indicator_info * indic = &ti_indicators[task->indic_index];
   int inputs_offset = 0;
@@ -113,7 +121,7 @@ void task_link(int task_index) {
   task->inputs_offset = inputs_offset;
 }
 
-void task_run(int task_index) {
+void run(int task_index) {
   Task * task = &tasks[task_index];
   ti_indicator_info * indic = &ti_indicators[task->indic_index];
   if (task->start_task) {
