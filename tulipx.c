@@ -95,6 +95,24 @@ void task_input_map(
   map->data_index = data_index;
 }
 
+void task_link(int task_index) {
+  Task * task = &tasks[task_index];
+  ti_indicator_info * indic = &ti_indicators[task->index];
+  int inputs_offset = 0;
+  for (int i = 0; i < indic->inputs; ++i) {
+    InputMap * map = &task->inputs_map[i];
+    if (map->enabled) {
+      Task * target = &tasks[map->target_index];
+      const int offset = map->is_inputs ? target->inputs_offset :
+        target->outputs_offset;
+      task->inputs[i] = map->is_inputs ? target->inputs[map->data_index] :
+        target->outputs[map->data_index];
+      if (offset > inputs_offset) inputs_offset = offset;
+    }
+  }
+  task->inputs_offset = inputs_offset;
+}
+
 void task_run(int task_index) {
   Task * task = &tasks[task_index];
   ti_indicator_info * indic = &ti_indicators[task->index];
