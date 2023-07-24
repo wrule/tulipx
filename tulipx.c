@@ -38,6 +38,7 @@ void task_free(int index) {
       free(task->outputs[i]);
       task->outputs[i] = NULL;
     }
+    task->inputs_info[i].enabled = 0;
   }
 }
 
