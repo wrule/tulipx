@@ -63,6 +63,13 @@ void task_push(int index, int size, int start_task) {
   }
 }
 
+TI_REAL * task_input(int task_index, int data_index) {
+  Task * task = &tasks[task_index];
+  if (task->inputs[data_index] == NULL)
+    task->inputs[data_index] = malloc(sizeof(TI_REAL) * task->size);
+  return task->inputs[data_index];
+}
+
 int main() {
   printf("你好，世界\n");
   return 0;
