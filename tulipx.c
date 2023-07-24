@@ -20,6 +20,7 @@ typedef struct {
 typedef struct {
   int used;
   int indicator_index;
+  int start_task;
   int size;
   TI_REAL options[DATA_MAX];
   int inputs_offset;
