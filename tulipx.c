@@ -26,7 +26,7 @@ typedef struct {
   TI_REAL * inputs[DATA_MAX];
   int outputs_offset;
   TI_REAL * outputs[DATA_MAX];
-  MapInfo inputs_map[DATA_MAX];
+  InputInfo inputs_info[DATA_MAX];
 } Task;
 
 int main() {
