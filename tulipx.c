@@ -16,6 +16,7 @@ typedef struct {
 typedef struct {
   int index;
   int size;
+  int start_task;
   TI_REAL options[DATA_MAX];
   int inputs_offset;
   TI_REAL * inputs[DATA_MAX];
@@ -56,6 +57,7 @@ void task_push(int index, int size, int start_task) {
   Task * task = &tasks[next];
   task->index = index;
   task->size = size;
+  task->start_task = start_task;
   ti_indicator_info * indic = &ti_indicators[index];
   if (!start_task) {
     for (int i = 0; i < indic->outputs; ++i)
@@ -91,6 +93,28 @@ void task_input_map(
   map->target_index = target_index;
   map->is_inputs = is_inputs;
   map->data_index = data_index;
+}
+
+void task_run(int task_index) {
+  Task * task = &tasks[task_index];
+  ti_indicator_info * indic = &ti_indicators[task->index];
+  if (task->start_task) {
+    task->outputs_offset = indic->start(task->options);
+    return;
+  }
+  //
+  const TI_REAL * inputs[DATA_MAX];
+  TI_REAL * outputs[DATA_MAX];
+  for (int i = 0; i < indic->inputs; ++i)
+    inputs[i] = &task->inputs[i][task->inputs_offset];
+  for (int i = 0; i < indic->outputs; ++i)
+    outputs[i] = &task->outputs[i][task->outputs_offset];
+  indic->indicator(
+    task->size - task->inputs_offset,
+    inputs,
+    task->options,
+    outputs
+  );
 }
 
 int main() {
