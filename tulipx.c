@@ -37,7 +37,7 @@ void init(int task_index) {
   }
 }
 
-void task_free(int task_index) {
+void erase(int task_index) {
   Task * task = &tasks[task_index];
   for (int i = 0; i < DATA_MAX; ++i) {
     if (task->inputs[i] != NULL) {
