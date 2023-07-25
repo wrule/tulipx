@@ -28,26 +28,22 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
-void init() {
-  for (int task_index = 0; task_index < TASK_MAX; ++task_index) {
-    Task * task = &tasks[task_index];
-    for (int data_index = 0; data_index < DATA_MAX; ++data_index)
-      task->inputs[data_index] = task->outputs[data_index] = NULL;
-  }
-}
-
-void erase(int task_index) {
+void erase(int task_index, int only_erase) {
   Task * task = &tasks[task_index];
   for (int data_index = 0; data_index < DATA_MAX; ++data_index) {
-    if (task->inputs[data_index] != NULL) free(task->inputs[data_index]);
-    if (task->outputs[data_index] != NULL) free(task->outputs[data_index]);
+    if (!only_erase && task->inputs[data_index] != NULL) free(task->inputs[data_index]);
+    if (!only_erase && task->outputs[data_index] != NULL) free(task->outputs[data_index]);
     task->inputs[data_index] = task->outputs[data_index] = NULL;
   }
 }
 
+void erase_batch(int start_index, int end_index, int only_erase) {
+  for (int i = start_index; i <= end_index; ++i) erase(i, only_erase);
+}
+
 int push(int indic_index, int size, int start_task) {
   int task_index = next;
-  erase(task_index);
+  erase(task_index, 0);
   Task * task = &tasks[task_index];
   task->indic_index = indic_index;
   task->size = size;
@@ -63,7 +59,7 @@ int push(int indic_index, int size, int start_task) {
 
 void pop() {
   if (--next < 0) next = TASK_MAX - 1;
-  erase(next);
+  erase(next, 0);
 }
 
 TI_REAL * inputs(int task_index, int data_index) {
