@@ -28,9 +28,12 @@ typedef struct {
 int next = 0;
 Task tasks[TASK_MAX];
 
-void init(int task_index) {
-  for (int i = 0; i < DATA_MAX; ++i)
-    tasks[task_index].inputs[i] = tasks[task_index].outputs[i] = NULL;
+void init() {
+  for (int task_index = 0; task_index < TASK_MAX; ++task_index) {
+    Task * task = &tasks[task_index];
+    for (int data_index = 0; data_index < DATA_MAX; ++data_index)
+      task->inputs[data_index] = task->outputs[data_index] = NULL;
+  }
 }
 
 void erase(int task_index) {
