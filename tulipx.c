@@ -26,6 +26,7 @@ typedef struct {
 } Task;
 
 int next = 0;
+int first_use = 1;
 Task tasks[TASK_MAX];
 
 void erase(int task_index, int only_erase) {
@@ -42,6 +43,10 @@ void erase_batch(int start_index, int end_index, int only_erase) {
 }
 
 int push(int indic_index, int size, int start_task) {
+  if (first_use) {
+    erase_batch(0, TASK_MAX - 1, 1);
+    first_use = 0;
+  }
   int task_index = next;
   erase(task_index, 0);
   Task * task = &tasks[task_index];
