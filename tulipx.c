@@ -38,10 +38,10 @@ void init() {
 
 void erase(int task_index) {
   Task * task = &tasks[task_index];
-  for (int i = 0; i < DATA_MAX; ++i) {
-    if (task->inputs[i] != NULL) free(task->inputs[i]);
-    if (task->outputs[i] != NULL) free(task->outputs[i]);
-    task->inputs[i] = task->outputs[i] = NULL;
+  for (int data_index = 0; data_index < DATA_MAX; ++data_index) {
+    if (task->inputs[data_index] != NULL) free(task->inputs[data_index]);
+    if (task->outputs[data_index] != NULL) free(task->outputs[data_index]);
+    task->inputs[data_index] = task->outputs[data_index] = NULL;
   }
 }
 
