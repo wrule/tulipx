@@ -43,12 +43,10 @@ void erase_batch(int start_index, int end_index, int only_erase) {
 }
 
 int push(int indic_index, int size, int start_task) {
-  if (first_use) {
-    erase_batch(0, TASK_MAX - 1, 1);
-    first_use = 0;
-  }
   int task_index = next;
-  erase(task_index, 0);
+  if (first_use) erase_batch(0, TASK_MAX - 1, 1);
+  else erase(task_index, 0);
+  first_use = 0;
   Task * task = &tasks[task_index];
   task->indic_index = indic_index;
   task->size = size;
