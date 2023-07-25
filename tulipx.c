@@ -46,8 +46,9 @@ void erase(int task_index) {
 }
 
 int push(int indic_index, int size, int start_task) {
-  erase(next);
-  Task * task = &tasks[next];
+  int task_index = next;
+  erase(task_index);
+  Task * task = &tasks[task_index];
   task->indic_index = indic_index;
   task->size = size;
   task->start_task = start_task;
@@ -56,7 +57,6 @@ int push(int indic_index, int size, int start_task) {
     for (int i = 0; i < indic->outputs; ++i)
       task->outputs[i] = malloc(sizeof(TI_REAL) * size);
   }
-  int task_index = next;
   if (++next >= TASK_MAX) next = 0;
   return task_index;
 }
