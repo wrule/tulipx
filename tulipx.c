@@ -143,6 +143,10 @@ void run(int task_index) {
   );
 }
 
+void run_batch(int start_index, int end_index) {
+  for (int i = start_index; i <= end_index; ++i) run(i);
+}
+
 int main() {
   int a, b;
   printf("你好，世界%p\n", NULL);
