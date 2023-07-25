@@ -29,26 +29,16 @@ int next = 0;
 Task tasks[TASK_MAX];
 
 void init(int task_index) {
-  Task * task = &tasks[task_index];
-  for (int i = 0; i < DATA_MAX; ++i) {
-    task->inputs[i] = NULL;
-    task->outputs[i] = NULL;
-    task->inputs_map[i].enabled = 0;
-  }
+  for (int i = 0; i < DATA_MAX; ++i)
+    tasks[task_index].inputs[i] = tasks[task_index].outputs[i] = NULL;
 }
 
 void erase(int task_index) {
   Task * task = &tasks[task_index];
   for (int i = 0; i < DATA_MAX; ++i) {
-    if (task->inputs[i] != NULL) {
-      free(task->inputs[i]);
-      task->inputs[i] = NULL;
-    }
-    if (task->outputs[i] != NULL) {
-      free(task->outputs[i]);
-      task->outputs[i] = NULL;
-    }
-    task->inputs_map[i].enabled = 0;
+    if (task->inputs[i] != NULL) free(task->inputs[i]);
+    if (task->outputs[i] != NULL) free(task->outputs[i]);
+    task->inputs[i] = task->outputs[i] = NULL;
   }
 }
 
@@ -146,6 +136,7 @@ void run(int task_index) {
 }
 
 int main() {
+  int a, b;
   printf("你好，世界\n");
   return 0;
 }
