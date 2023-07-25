@@ -61,6 +61,11 @@ int push(int indic_index, int size, int start_task) {
   return task_index;
 }
 
+void pop() {
+  if (--next < 0) next = TASK_MAX - 1;
+  erase(next);
+}
+
 TI_REAL * inputs(int task_index, int data_index) {
   Task * task = &tasks[task_index];
   if (task->inputs[data_index] == NULL)
