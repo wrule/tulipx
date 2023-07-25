@@ -45,7 +45,7 @@ void erase(int task_index) {
   }
 }
 
-void push(int indic_index, int size, int start_task) {
+int push(int indic_index, int size, int start_task) {
   erase(next);
   Task * task = &tasks[next];
   task->indic_index = indic_index;
@@ -140,6 +140,6 @@ void run(int task_index) {
 
 int main() {
   int a, b;
-  printf("你好，世界\n");
+  printf("你好，世界%p\n", NULL);
   return 0;
 }
