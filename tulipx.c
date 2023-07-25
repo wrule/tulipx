@@ -35,6 +35,7 @@ void erase(int task_index, int only_erase) {
     if (!only_erase && task->inputs[data_index] != NULL) free(task->inputs[data_index]);
     if (!only_erase && task->outputs[data_index] != NULL) free(task->outputs[data_index]);
     task->inputs[data_index] = task->outputs[data_index] = NULL;
+    task->inputs_map[data_index].enabled = 0;
   }
 }
 
