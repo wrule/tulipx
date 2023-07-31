@@ -175,6 +175,10 @@ int roi(
   }
 }
 
+int roi_start(TI_REAL const * options) {
+  return 0;
+}
+
 int main() {
   printf("你好，世界 %d\n", NAN <= 0);
   return 0;
