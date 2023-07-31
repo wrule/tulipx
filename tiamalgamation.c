@@ -4364,6 +4364,7 @@ int ti_crossroi(
     roi[i] = funds + assets * price;
     prev = signal;
   }
+  return TI_OKAY;
 }
 
 int ti_crossroi_start(TI_REAL const * options) {
