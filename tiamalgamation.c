@@ -4337,7 +4337,7 @@ int ti_zlema(int size, TI_REAL const *const *inputs, TI_REAL const *options, TI_
 }
 
 
-int roi(
+int ti_crossroi(
   int size,
   TI_REAL const * const * inputs,
   TI_REAL const * options,
@@ -4366,7 +4366,7 @@ int roi(
   }
 }
 
-int roi_start(TI_REAL const * options) {
+int ti_crossroi_start(TI_REAL const * options) {
   return 0;
 }
 
