@@ -155,19 +155,19 @@ int roi(
   TI_REAL fee = 1 - options[0];
   TI_REAL funds = 1;
   TI_REAL assets = 0;
-  TI_REAL prev = NAN;
-  const TI_REAL * prices = inputs[0];
-  const TI_REAL * signals = inputs[1];
+  TI_REAL const * prices = inputs[0];
+  TI_REAL const * signals = inputs[1];
   TI_REAL * roi = outputs[0];
+  TI_REAL prev = NAN;
   for (size_t i = 0; i < size; ++i) {
-    const TI_REAL price = prices[i];
-    const TI_REAL signal = signals[i];
+    TI_REAL const price = prices[i];
+    TI_REAL const signal = signals[i];
     if (prev <= 0 && signal > 0) {
-      assets += funds / price * fee;
+      assets += (funds / price) * fee;
       funds = 0;
     }
     if (prev >=0 && signal < 0) {
-      funds += assets * price * fee;
+      funds += (assets * price) * fee;
       assets = 0;
     }
     roi[i] = funds + assets * price;
