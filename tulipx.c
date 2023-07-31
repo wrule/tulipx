@@ -145,3 +145,17 @@ void run(int task_index) {
 void run_batch(int start_index, int end_index) {
   for (int i = start_index; i <= end_index; ++i) run(i);
 }
+
+int roi(
+  int size,
+  TI_REAL const * const * inputs,
+  TI_REAL const * options,
+  TI_REAL * const * outputs
+) {
+
+}
+
+int main() {
+  printf("你好，世界\n");
+  return 0;
+}
